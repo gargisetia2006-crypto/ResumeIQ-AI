@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-background">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeIQ AI — AI Resume Analyzer &amp; ATS Score Checker</title>
+  <meta name="description" content="ResumeIQ AI analyzes your resume against any job role, returns an ATS score, and gives actionable improvements, missing skills, keywords, projects, and certifications." />
+  <meta name="theme-color" content="#7c3aed" />
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- In Flask, use: {{ url_for('static', filename='css/style.css') }} -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+    <!-- ================= LOGO HEADER ================= -->
+
+<header class="top-header">
+    <div class="container">
+
+        <a href="/" class="brand">
+
+            <span class="brand-mark">
+                <span>IQ</span>
+            </span>
+
+            <span class="brand-text">
+                ResumeIQ
+                <span class="brand-ai">AI</span>
+            </span>
+
+        </a>
+
+    </div>
+</header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> AI-powered resume intelligence</span>
+        <h1>
+AI-Powered Resume Analyzer for
+<span style="color:var(--primary)">Smarter ATS Optimization</span>
+</h1>
+
+<p class="lead">
+Upload your resume in PDF format, specify your target job role, and receive
+an AI-powered ATS analysis including an ATS score, missing skills,
+missing keywords, resume improvements, recommended projects,
+and certification suggestions.
+</p>
+        <div class="hero-actions">
+    <a class="btn btn-primary btn-lg" href="#analyze">
+        Analyze Resume
+    </a>
+
+  
+</div>
+       
+      </div>
+
+      <!-- ============ ANALYZE / UPLOAD CARD ============ -->
+      <div class="analyze-card" id="analyze">
+        <h3>Analyze your resume</h3>
+    <p class="sub">
+Upload your resume in PDF format and enter the target job role to receive a complete AI-powered ATS analysis.
+</p>
+
+        <!-- In Flask: <form method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data"> -->
+        <form id="analyzeForm" method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data">
+          <label class="dropzone" id="dropzone" for="resumeInput">
+            <span class="dz-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </span>
+            <div class="dz-title">Drop your resume here or <u>browse</u></div>
+            <div class="dz-hint">PDF— up to 5MB</div>
+            <input type="file" id="resumeInput" name="resume" accept=".pdf" required />
+          </label>
+
+          <div class="file-pill" id="filePill">
+            <span class="fp-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+            </span>
+            <div class="fp-info">
+              <div class="fp-name" id="fpName">resume.pdf</div>
+              <div class="fp-size" id="fpSize">0 KB</div>
+            </div>
+            <button type="button" class="fp-remove" id="fpRemove" aria-label="Remove file">&times;</button>
+          </div>
+
+          <div class="field">
+            <label for="jobRole">Target job role</label>
+            <input type="text" id="jobRole" name="job_role" placeholder="e.g. Senior Frontend Engineer" required />
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="analyzeBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+              Analyze Resume
+            </button>
+          </div>
+
+          <div class="trust">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= FEATURES ================= -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> Everything in one scan</span>
+        <h2>Insights that actually get you hired</h2>
+        <p>ResumeIQ AI reads your resume the way a recruiter&apos;s ATS does — then translates the results into a clear action plan.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+          </div>
+          <h3>ATS compatibility score</h3>
+          <p>A 0–100 score showing how well your resume parses through applicant tracking systems.</p>
+        </article>
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Missing skills &amp; keywords</h3>
+          <p>See exactly which role-specific keywords and skills your resume is missing.</p>
+        </article>
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+          </div>
+          <h3>Actionable improvements</h3>
+          <p>Prioritized, plain-English suggestions you can apply in minutes — no guesswork.</p>
+        </article>
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>Recommended projects</h3>
+          <p>Portfolio-ready project ideas that fill the gaps recruiters expect for your role.</p>
+        </article>
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3>Certifications that matter</h3>
+          <p>Curated certifications that boost credibility and keyword match for your target job.</p>
+        </article>
+        <article class="feature">
+          <div class="f-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Professional summary</h3>
+          <p>An instant, recruiter-friendly read on your profile&apos;s strengths and positioning.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="section" id="how" style="background:var(--beige)">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> Three simple steps</span>
+        <h2>From upload to offer-ready</h2>
+        <p>No account required to run your first scan.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature" style="background:#fff">
+          <div class="f-icon" aria-hidden="true"><strong style="font-weight:800">1</strong></div>
+          <h3>Upload your resume</h3>
+          <p>Drop a PDF file into the analyzer — it&apos;s parsed securely in seconds.</p>
+        </article>
+        <article class="feature" style="background:#fff">
+          <div class="f-icon" aria-hidden="true"><strong style="font-weight:800">2</strong></div>
+          <h3>Enter the target role</h3>
+          <p>Tell us the exact job title you&apos;re applying for so we tailor every insight.</p>
+        </article>
+        <article class="feature" style="background:#fff">
+          <div class="f-icon" aria-hidden="true"><strong style="font-weight:800">3</strong></div>
+          <h3>Get your report</h3>
+          <p>Receive your ATS score, gaps, and a prioritized action plan — instantly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BAND ================= -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Your next role is one scan away</h2>
+        <p>Upload your resume and receive an AI-powered ATS report in seconds.</p>
+        <a class="btn btn-primary btn-lg" href="#analyze">Analyze my resume for free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer" id="faq">
+    <div class="container footer-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark"><span>IQ</span></span>
+        ResumeIQ AI
+      </a>
+      
+      <span class="muted">© 2026 ResumeIQ AI. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

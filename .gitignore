@@ -1,0 +1,17 @@
+# Environment variables / secret keys
+.env
+
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploaded resume files
+uploads/*
+!uploads/.gitkeep
+
+# macOS
+.DS_Store
